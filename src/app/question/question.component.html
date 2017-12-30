@@ -1,0 +1,59 @@
+<div *ngIf="!showAns">
+    <div *ngIf="!showAddPoll">
+    <a class="btn btn-default" (click)="addNewPoll()">Add New Poll</a>
+    <list-question  (onClickEvent)="getQues($event)" [polls]="polls"></list-question>
+    </div>
+
+    <div *ngIf="showAddPoll">
+            <form #form='ngForm' (ngSubmit)="addPoll()" class="well" >
+                    <div class="form-group" >
+                            <label for="inputEmail">Poll Question</label>
+                            <input type="text" value="" name="pollqtn" class="form-control" [(ngModel)]="newPollQuestion.pollqtn" required />
+                        </div>
+                        <p>Choices</p>
+                        <div class="form-group" *ngFor="let item of newPollQuestion.pollans; let i = index; trackBy:trackByIndex" >
+                                <input type="text"  name="pollans_{{i}}" [(ngModel)]="newPollQuestion.pollans[i].name" class="form-control" required />
+                        </div>
+                   
+                        <input type="button" value="Add More"  (click)="addMoreOption()">
+                        <input type="submit" value="Add Poll"  >
+                        <input type="button" value="Back"  (click)="getBackToquestion()">
+            </form>
+       
+    </div>
+    </div>
+
+<div *ngIf="showAns">
+    <input type="button" value="Back" *ngIf="showAns" (click)="getBackToquestion()">
+    <h3>{{selectedPoll.pollqtn}}</h3>
+    <div *ngIf="!isAnswered" >
+        
+        
+        <form   class="well">  
+            <!-- <input type="hidden" value="{{selectedPoll._id}}"> -->
+        <div   *ngFor="let pol of selectedPoll.pollans" >
+        <label><input type="radio" value="{{pol.name}}" [(ngModel)]="sellll" required name="answers" >{{pol.name}}</label>
+        </div>
+  
+        <button type="button" (click)="answerPoll()" class="btn btn-success">Submit Answer</button>
+        </form>
+    </div>
+    <div *ngIf="isAnswered">
+            <div *ngFor="let item of selectedPoll.pollans; ">
+            <div class="col-md-2">
+               {{item.name}}
+        </div>
+        <div class="col-md-10">
+            <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar"  [ngStyle]="{'width': ((item.voteips.length/totalVotes)*100) + '%'}"  aria-valuenow="10" aria-valuemin="10" aria-valuemax="100">{{item.voteips.length}}</div>
+            </div>
+        
+        </div>    
+            </div>
+            <p><em>{{selectedPoll.totalVotes}} votes counted so far. <span
+                ng-show="selectedPoll.userChoice">You voted for <strong>{{selectedPoll.userChoice.name}}
+                </strong>.</span></em></p>
+            
+            
+    </div>
+</div>

@@ -1,0 +1,9 @@
+
+<h3>{{poll.pollqtn}}</h3>
+
+<form #form="ngForm" class="well">  
+<div class="form-control"  *ngFor="let pol of poll.pollans" >
+<label><input class="form-control" type="radio" name="pollans"  required  value="{{pol}}"  ngModel>{{pol}}</label>
+</div>
+<input type="submit" class="btn btn-success" value="Submit" >
+</form>

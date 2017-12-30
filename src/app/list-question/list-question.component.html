@@ -1,0 +1,8 @@
+<p>
+  Poll List
+</p>
+<input placeholder="Search.." class="form-control" [(ngModel)]="searchTerm" />
+
+  <li (click)="getPoll(poll)"  *ngFor="let poll of (polls | mysearchFilter:searchTerm)"  ><a >{{poll.pollqtn}}</a></li>
+  
+ 

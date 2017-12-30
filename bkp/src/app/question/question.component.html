@@ -1,0 +1,7 @@
+<div>
+    <list-question *ngIf="!showAns" (onClickEvent)="getQues($event)" [polls]="polls"></list-question>
+</div>
+<div>
+    <input type="button" value="Back" *ngIf="showAns" (click)="geBackToquestion()">
+    <answer *ngIf="showAns" (backEvent)="backToMain()"  [poll]="selectedPoll"></answer>
+</div>

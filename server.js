@@ -6,7 +6,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 
 const api = require("./server/routes/api");
-const port = 3002;
+const port = 8080;
 
 const app = express();
 
